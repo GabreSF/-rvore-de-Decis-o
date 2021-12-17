@@ -15,10 +15,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.express as px
 
-"""**Fonte dos Dados**
+"""**Fonte dos Dados**"""
+"""**Data Source**"""
 
-[Fonte](https://www.kaggle.com/laotse/credit-risk-dataset)
-"""
+"""**[Fonte](https://www.kaggle.com/laotse/credit-risk-dataset)**"""
+
 
 from google.colab import drive
 drive.mount('/content/drive')
@@ -32,6 +33,7 @@ base_credito.describe()
 base_credito[base_credito['person_income'] >= 6000000]
 
 """**Visualização dos Dados**"""
+"""**Data Visualization**"""
 
 base_credito[base_credito['loan_amnt'] <= 500.000000]
 
@@ -46,6 +48,7 @@ grafico = px.scatter_matrix(base_credito, dimensions=['person_age', 'person_inco
 grafico.show()
 
 """**Tratamento de valores inconsistentes**"""
+"""**handling inconsistent values**"""
 
 base_credito.loc[base_credito['person_age'] > 122]
 
@@ -58,6 +61,7 @@ base_credito.loc[base_credito['person_age'] > 122, 'person_age'] = 27.73
 base_credito.loc[base_credito['person_age'] > 122]
 
 """**Tratamento de Valores Faltantes**"""
+"""**Treatment of Missing Values**"""
 
 base_credito.isnull().sum()
 
@@ -74,6 +78,7 @@ base_credito['loan_int_rate'].fillna(base_credito['loan_int_rate'].mean(), inpla
 base_credito.loc[pd.isnull(base_credito['loan_int_rate'])]
 
 """**Divisão entre previsores e classe**"""
+"""**Division between predictors and class**"""
 
 x_credit = base_credito.iloc[:,0:2].values
 
@@ -84,6 +89,7 @@ y_credit = base_credito.iloc[:, 8].values
 y_credit
 
 """**Escalonamento dos valores**"""
+"""**Value scaling**"""
 
 x_credit
 
@@ -98,6 +104,7 @@ x_credit[:,0].max(), x_credit[:,1].max()
 x_credit
 
 """**Divisão das bases de treinamento e teste**"""
+"""**Division of training and testing bases**"""
 
 from sklearn.model_selection import train_test_split
 
@@ -110,6 +117,7 @@ y_credit_treinamento.shape
 x_credit_teste.shape, y_credit_teste.shape
 
 """**Salvando os dados já pre-processados**"""
+"""**Saving pre-processed data**"""
 
 import pickle
 
@@ -117,6 +125,7 @@ with open('credito.pkl', mode = 'wb') as f:
   pickle.dump([x_credit_treinamento, y_credit_treinamento, x_credit_teste, y_credit_teste], f)
 
 """**Árvore de Decisão**"""
+"""**Decision tree**"""
 
 from sklearn.tree import DecisionTreeClassifier
 
